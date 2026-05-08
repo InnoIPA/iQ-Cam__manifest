@@ -1,4 +1,10 @@
 # Change Logs
+## v1.1.5
+### Changes
+- Remove Ubuntu support from documentation (faq, gmsl, install, mipi guides)
+- Update BSP support section in README
+- Remove expired and broken release packages for Yocto 1.8 and Ubuntu x07
+
 ## v1.1.4
 ### New Features
 - Update GitHub Actions workflows to support automatic synchronization to the public repository.

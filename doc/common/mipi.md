@@ -14,7 +14,7 @@ To build a MIPI vision system, the following components are required:
 
 - **Cameras**: [EVDM-OOM1](https://www.innodisk.com/en/products/camera/mipi-csi-2/evdm-oom1-rhcf), [EV2M-OOM3](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev2m-oom3-rhcf), [EV8M-OOM1](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev8m-oom1-rhcf)
 - **Evaluation Kits**: [EXEC-Q911](https://www.innodisk.com/cht/products/computing/qualcomm-solution/EXEC-Q911), [iQ-9075 EVK](https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk)
-- **Operating Systems**: [Yocto Linux 1.6](https://docs.qualcomm.com/doc/80-70022-254/topic/build_addn_info.html?product=895724676033554725&version=1.6), [Ubuntu 24.04 (x07)](https://people.canonical.com/~platform/images/qualcomm-iot/ubuntu-24.04/ubuntu-24.04-x07/)
+- **Operating Systems**: [Yocto Linux 1.6](https://docs.qualcomm.com/doc/80-70022-254/topic/build_addn_info.html?product=895724676033554725&version=1.6)
 
 ## Camera Matrix
 
@@ -24,9 +24,9 @@ Specific connection procedures vary depending on the target platform. Follow the
 
 | Module    | Support Platform | Support OS                          | CN_CSI1 | CN_CSI2 | Resolution, Frame Rate |
 | --------- | ---------------- | ----------------------------------- | ------- | ------- | ---------------------- |
-| EVDM-OOM1 | EXEC-Q911        | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅      | ✅      | 1920x1080, 30 FPS      |
-| EV2M-OOM3 | EXEC-Q911        | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅      | ✅      | 1920x1080, 30 FPS      |
-| EV8M-OOM1 | EXEC-Q911        | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅      | ✅      | 1920x1080, 30 FPS      |
+| EVDM-OOM1 | EXEC-Q911        | Yocto Linux 1.6 | ✅      | ✅      | 1920x1080, 30 FPS      |
+| EV2M-OOM3 | EXEC-Q911        | Yocto Linux 1.6 | ✅      | ✅      | 1920x1080, 30 FPS      |
+| EV8M-OOM1 | EXEC-Q911        | Yocto Linux 1.6 | ✅      | ✅      | 1920x1080, 30 FPS      |
 
 > ✅ Supported | ❌ Not supported | ☑️ Coming soon
 
@@ -46,9 +46,9 @@ To connect the camera to the EXEC-Q911, follow these steps:
 
 | Module    | Support Platform | Support OS                          | JCAM0 | JCAM1 | JCAM2 | JCAM3 | Resolution, Frame Rate |
 | --------- | ---------------- | ----------------------------------- | ----- | ----- | ----- | ----- | ---------------------- |
-| EVDM-OOM1 | iQ-9075 EVK      | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
-| EV2M-OOM3 | iQ-9075 EVK      | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
-| EV8M-OOM1 | iQ-9075 EVK      | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
+| EVDM-OOM1 | iQ-9075 EVK      | Yocto Linux 1.6| ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
+| EV2M-OOM3 | iQ-9075 EVK      | Yocto Linux 1.6 | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
+| EV8M-OOM1 | iQ-9075 EVK      | Yocto Linux 1.6 | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
 
 > ✅ Supported | ❌ Not supported | ☑️ Coming soon
 
@@ -64,7 +64,7 @@ To connect the camera to the iQ-9075 EVK, follow these steps:
 
 ## How to Install
 
-For a complete walkthrough of the setup process for both Yocto Linux and Ubuntu systems, see the **[Installation Guide](./install.md)**.
+For a complete walkthrough of the setup process for both Yocto Linux systems, see the **[Installation Guide](./install.md)**.
 
 ## How to Switch Modules
 

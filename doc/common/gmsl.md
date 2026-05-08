@@ -14,7 +14,7 @@ To build a GMSL vision system, the following components are required:
 - **Adapter Boards**: [EB022-2M4F](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f)
 - **Evaluation Kits**: [EXEC-Q911](https://www.innodisk.com/cht/products/computing/qualcomm-solution/EXEC-Q911), [iQ-9075 EVK](https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk)
 - **Mezzanine Board**: [Qualcomm GMSL Mezzanine](https://docs.qualcomm.com/bundle/resource/topics/80-70020-17A/connect-camera-sensor-hardware.html)
-- **Operating Systems**: [Yocto Linux 1.6](https://docs.qualcomm.com/doc/80-70022-254/topic/build_addn_info.html?product=895724676033554725&version=1.6), [Ubuntu 24.04 (x07)](https://people.canonical.com/~platform/images/qualcomm-iot/ubuntu-24.04/ubuntu-24.04-x07/)
+- **Operating Systems**: [Yocto Linux 1.6](https://docs.qualcomm.com/doc/80-70022-254/topic/build_addn_info.html?product=895724676033554725&version=1.6)
 
 ## Camera Matrix
  
@@ -26,8 +26,8 @@ The EXEC-Q911 supports multi-channel GMSL input via the EB022-2M4F adapter board
 
 | Module    | Support Platform | Adapter Board | Supported OS                        | CN_CSI1 | CN_CSI2 | Resolution, Frame Rate |
 | --------- | ---------------- | ------------- | ----------------------------------- | ------- | ------- | ---------------------- |
-| EVDF-OOM1 | EXEC-Q911        | EB022-2M4F    | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅      | ✅      | 1920x1080, 30 FPS      |
-| EV3F-ZSM1 | EXEC-Q911        | EB022-2M4F    | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅      | ✅      | 1920x1536, 30 FPS      |
+| EVDF-OOM1 | EXEC-Q911        | EB022-2M4F    | Yocto Linux 1.6  | ✅      | ✅      | 1920x1080, 30 FPS      |
+| EV3F-ZSM1 | EXEC-Q911        | EB022-2M4F    | Yocto Linux 1.6 | ✅      | ✅      | 1920x1536, 30 FPS      |
 
 > ✅ Supported | ❌ Not supported | ☑️ Coming soon
 
@@ -47,8 +47,8 @@ To connect the GMSL camera to the EXEC-Q911 using the EB022-2M4F adapter board, 
 
 | Module    | Support Platform | Adapter Board | Supported OS                        | JCAM0 | JCAM1 | JCAM2 | JCAM3 | Resolution, Frame Rate |
 | --------- | ---------------- | ------------- | ----------------------------------- | ----- | ----- | ----- | ----- | ---------------------- |
-| EVDF-OOM1 | iQ-9075 EVK      | EB022-2M4F    | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
-| EV3F-ZSM1 | iQ-9075 EVK      | EB022-2M4F    | Yocto Linux 1.6, Ubuntu 24.04 (x07) | ✅    | ✅    | ✅    | ✅    | 1920x1536, 30 FPS      |
+| EVDF-OOM1 | iQ-9075 EVK      | EB022-2M4F    | Yocto Linux 1.6 | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
+| EV3F-ZSM1 | iQ-9075 EVK      | EB022-2M4F    | Yocto Linux 1.6 | ✅    | ✅    | ✅    | ✅    | 1920x1536, 30 FPS      |
 
 > ✅ Supported | ❌ Not supported | ☑️ Coming soon
 
@@ -70,7 +70,7 @@ The iQ-9075 EVK can be expanded with a GMSL Mezzanine board for direct GMSL inte
 
 | Module    | Adapter Board   | Supported OS                 | Port0 | Port1 | Port2 | Port3 | Resolution, Frame Rate |
 | --------- | --------------- | ---------------------------- | ----- | ----- | ----- | ----- | ---------------------- |
-| EVDF-OOM1 | Mezzanine Board | Yocto Linux, Ubuntu 24.04    | ❌    | ❌    | ✅    | ❌    | 1920x1080, 30 FPS      |
+| EVDF-OOM1 | Mezzanine Board | Yocto Linux 1.6    | ❌    | ❌    | ✅    | ❌    | 1920x1080, 30 FPS      |
 
 > ✅ Supported | ❌ Not supported | ☑️ Coming soon
 
@@ -114,7 +114,7 @@ The following diagrams provide additional context for complex multi-camera and p
 <br />
 
 ## How to Install
-For detailed, step-by-step instructions for both Yocto Linux and Ubuntu, please refer to the **[Installation Guide](./install.md)**.
+For detailed, step-by-step instructions for both Yocto Linux please refer to the **[Installation Guide](./install.md)**.
 
 ## How to Switch Modules
 
@@ -210,116 +210,6 @@ EOF
 ```bash
 pkill cam-server && sleep 15 &&
 GST_GL_API=gles2 XDG_RUNTIME_DIR=/dev/socket/weston WAYLAND_DISPLAY=wayland-1 \
-gst-camera-per-port-example --custom <<EOF
-1 0 2 3 5 4 6 7
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-1
-1920
-1080
-30
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc1 camera=1 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc0 camera=0 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc2 camera=2 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc3 camera=3 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc5 camera=5 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc4 camera=4 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc6 camera=6 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc7 camera=7 ! video/x-raw,format=NV12,width=1920,height=1080,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-EOF
-```
-</details>
-
-#### Ubuntu 24.04
-> ⚠️ **Warning:** You must create the following link first to resolve a known issue in Ubuntu x07:
-```bash
-sudo ln -s /usr/lib/aarch64-linux-gnu/libfastcvopt.so.1 /usr/lib/libfastcvopt.so.1
-```
-
-<details>
-<summary>EV3F-ZSM1 (8-Channel Display)</summary>
-
-```bash
-sudo pkill cam-server
-sleep 12
-gst-camera-per-port-example --custom <<EOF
-1 0 2 3 5 4 6 7
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-1
-1920
-1536
-30
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc1 camera=1 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc0 camera=0 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc2 camera=2 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc3 camera=3 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc5 camera=5 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc4 camera=4 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc6 camera=6 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc7 camera=7 ! video/x-raw,format=NV12,width=1920,height=1536,framerate=30/1 ! videoconvert ! videoscale ! video/x-raw,width=480,height=384 ! fpsdisplaysink video-sink=glimagesink sync=false text-overlay=true
-EOF
-```
-</details>
-
-<details>
-<summary>EVDF-OOM1 (8-Channel Display)</summary>
-
-```bash
-sudo pkill cam-server
-sleep 12
 gst-camera-per-port-example --custom <<EOF
 1 0 2 3 5 4 6 7
 1
