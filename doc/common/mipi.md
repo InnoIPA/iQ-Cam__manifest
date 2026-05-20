@@ -70,6 +70,10 @@ For a complete walkthrough of the setup process for both Yocto Linux systems, se
 
 Please refer to **[Installation Guide](./install.md)**, reinstall the module package (tar.gz) you want to install, and then reboot the system to replace the module.
 
+## How to Verify
+
+For instructions on verifying that the camera is functioning correctly after installation, see the **[Verify Guide](./verify.md)**.
+
 ## How to Use
 
 If the camera is properly connected and the required drivers are installed, you can use GStreamer to interact with the camera streams.

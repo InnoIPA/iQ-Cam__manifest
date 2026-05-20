@@ -37,6 +37,7 @@ Gigabit Multimedia Serial Link (GMSL) is a robust interface that allows high-spe
 ## Release Notes
 | Version | Key Changes |
 | :--- | :--- |
+| **v1.1.6** | Added `build_deploy_test.sh` end-to-end build/deploy/capture script and Claude Code workflow skills; imported vendor reference docs (Qualcomm 1.6/1.8 Camera Guide, GMSL2, MAX96724, MAX9295D); added EV3F-ZSM1 PP19 known-good baseline and `doc/common/verify.md`; public-mirror sync now clears `release/*` before copying. |
 | **v1.1.5** | Removed Ubuntu support from documentation; updated BSP support section; removed expired release packages. |
 | **v1.1.4** | Updated GitHub Actions workflows for automatic public repository synchronization; added `DEVELOPMENT.md`. |
 | **v1.1.3** | Added colorbar mode for EV8M-OOM1. |

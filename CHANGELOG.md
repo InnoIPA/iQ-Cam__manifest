@@ -1,4 +1,17 @@
 # Change Logs
+## v1.1.6
+### Infrastructure
+- `sync-to-public.yml` clears `public-repo/release/*` before copying so removed tarballs drop from the public mirror.
+
+### Developer Tooling
+- Add `build_deploy_test.sh`: end-to-end build, deploy, and GStreamer capture check.
+- Add Claude Code workflow skills under `.claude/skills/` and a project-level `CLAUDE.md`.
+
+### Documentation
+- Import vendor reference docs under `doc/reference/` (Qualcomm 1.6/1.8 Camera Guide, GMSL2, MAX96724, MAX9295D).
+- Add a known-good QLI 1.6 `ev3f_zsm1_pp19_linkA` baseline for diffing against failing runs.
+- Add `doc/common/verify.md` for the post-deploy capture check.
+
 ## v1.1.5
 ### Changes
 - Remove Ubuntu support from documentation (faq, gmsl, install, mipi guides)
