@@ -6,11 +6,16 @@ iQ-Cam is a project designed to generate CHI-CDK compatible patches for Qualcomm
 
 This repo supports the following Q911 BSP versions (from the [meta-iQ__manifest](https://github.com/InnoIPA/meta-iQ__manifest) repository):
 
-| BSP Version | Support Status | Release Folder |
-| ----------- | -------------- | -------------- |
-| **v2.1.0**  | ✅             | `release/yocto_1.6` |
-| **v2.3.0**  | ❌             | -              |
-| **v2.3.1**  | ❌             | -              |
+| BSP Version | QLI version | iQ-Cam Version         | Tested |
+| ----------- | ----------- | ---------------------- | ------ |
+| **v2.1.0**  | v1.6        | v1.1.4, v1.1.5, v1.1.6 | ✅     |
+| **v2.3.0**  | v1.8        | -                      | -      |
+| **v2.3.1**  | v1.8        | -                      | -      |
+| **v2.3.2**  | v1.8        | v2.0.0                 | ✅     |
+| **v2.3.3**  | v1.8        | -                      | -      |
+
+> **Note:** Although **v2.3.0**, **v2.3.1**, and **v2.3.3** have not been explicitly tested, they are all based on QLI 1.8, so they should work without issues.
+
 
 ## Supported Interfaces
 
@@ -37,6 +42,7 @@ Gigabit Multimedia Serial Link (GMSL) is a robust interface that allows high-spe
 ## Release Notes
 | Version | Key Changes |
 | :--- | :--- |
+| **v2.0.0** | Upgraded to Yocto QLI 1.8 (dropped Ubuntu and MZB targets); fixed EVDF-OOM1 GMSL probe sequence; added HTML porting guide site; removed iQ-9075 EVK from documentation — EXEC-Q911 is now the only documented evaluation kit. |
 | **v1.1.6** | Added `build_deploy_test.sh` end-to-end build/deploy/capture script and Claude Code workflow skills; imported vendor reference docs (Qualcomm 1.6/1.8 Camera Guide, GMSL2, MAX96724, MAX9295D); added EV3F-ZSM1 PP19 known-good baseline and `doc/common/verify.md`; public-mirror sync now clears `release/*` before copying. |
 | **v1.1.5** | Removed Ubuntu support from documentation; updated BSP support section; removed expired release packages. |
 | **v1.1.4** | Updated GitHub Actions workflows for automatic public repository synchronization; added `DEVELOPMENT.md`. |
@@ -50,14 +56,13 @@ Gigabit Multimedia Serial Link (GMSL) is a robust interface that allows high-spe
 The `release/` directory contains all generated .tar.gz files, which can be installed on compatible devices.
 Below is the list of available release packages:
 
-| Module Name    | Phy Type | Support Resolution | Support OS             | Support Platform         | CSI# (CHI-CDK Slot ID)                                                            |
-| -------------- | -------- | ------------------ | ---------------------- | ------------------------ | --------------------------------------------------------------------------------- |
-| ev2m_oom3      | DPHY     | `1920x1080,30FPS`  | `yocto_1.6` | `IQ_9075_EVK` `Q911_DVT` | `CSI0(20)` `CSI1(21)` `CSI2(22)` `CSI3(23)`                                       |
-| ev8m_oom1      | DPHY     | `1920x1080,30FPS`  | `yocto_1.6` | `IQ_9075_EVK` `Q911_DVT` | `CSI0(20)` `CSI1(21)` `CSI2(22)` `CSI3(23)`                                       |
-| evdm_oom1      | DPHY     | `1920x1080,30FPS`  | `yocto_1.6` | `IQ_9075_EVK` `Q911_DVT` | `CSI0(20)` `CSI1(21)` `CSI2(22)` `CSI3(23)`                                       |
-| ev3f_zsm1_pp19 | DPHY     | `1920x1536,30FPS`  | `yocto_1.6` | `IQ_9075_EVK` `Q911_DVT` | `CSI0(0, 1, 2, 3)` `CSI1(4, 5, 6, 7)` `CSI2(8, 9, 10, 11)` `CSI2(12, 13, 14, 15)` |
-| evdf_oom1_pp19 | DPHY     | `1920x1080,30FPS`  | `yocto_1.6` | `IQ_9075_EVK` `Q911_DVT` | `CSI0(0, 1, 2, 3)` `CSI1(4, 5, 6, 7)` `CSI2(8, 9, 10, 11)` `CSI2(12, 13, 14, 15)` |
-| evdf_oom1_mzb  | CPHY     | `1920x1080,30FPS`  | `yocto_1.6` | `IQ_9075_EVK`            | `CSI2(8)`                                                                         |
+| Module Name                                                                                                                                                | Phy Type | Support Resolution |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------ |
+| [ev2m_oom3](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev2m-oom3-rhcf)                                                                         | DPHY     | `1920x1080,30FPS`  |
+| [ev8m_oom1](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev8m-oom1-rhcf)                                                                         | DPHY     | `1920x1080,30FPS`  |
+| [evdm_oom1](https://www.innodisk.com/en/products/camera/mipi-csi-2/evdm-oom1-rhcf)                                                                       | DPHY     | `1920x1080,30FPS`  |
+| [ev3f_zsm1](https://www.innodisk.com/en/products/camera/gmsl2/ev3f-zsm1-rxcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f) | DPHY     | `1920x1536,30FPS`  |
+| [evdf_oom1](https://www.innodisk.com/en/products/camera/gmsl2/evdf-oom1-rhcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f) | DPHY     | `1920x1080,30FPS`  |
 
 > **Note - Colorbar Mode:** Some release packages are available with a `_colorbar` suffix (e.g., `ev2m_oom3_colorbar`). In this mode, the only difference is that the output image uses a colorbar; all other behavior is the same as the standard mode.
 

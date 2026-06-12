@@ -13,20 +13,20 @@ With its mature ecosystem and broad sensor compatibility, MIPI CSI-2 is commonly
 To build a MIPI vision system, the following components are required:
 
 - **Cameras**: [EVDM-OOM1](https://www.innodisk.com/en/products/camera/mipi-csi-2/evdm-oom1-rhcf), [EV2M-OOM3](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev2m-oom3-rhcf), [EV8M-OOM1](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev8m-oom1-rhcf)
-- **Evaluation Kits**: [EXEC-Q911](https://www.innodisk.com/cht/products/computing/qualcomm-solution/EXEC-Q911), [iQ-9075 EVK](https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk)
-- **Operating Systems**: [Yocto Linux 1.6](https://docs.qualcomm.com/doc/80-70022-254/topic/build_addn_info.html?product=895724676033554725&version=1.6)
+- **Evaluation Kits**: [EXEC-Q911](https://www.innodisk.com/cht/products/computing/qualcomm-solution/EXEC-Q911)
+- **Operating Systems**: [Yocto Linux](https://docs.qualcomm.com/doc/80-70029-254/topic/build_addn_info.html?product=895724676033554725&facet=Build%20Guide&version=1.8)
 
 ## Camera Matrix
 
 Specific connection procedures vary depending on the target platform. Follow the instructions below for your specific hardware.
 
-### 1. Connecting to EXEC-Q911
+### Connecting to EXEC-Q911
 
-| Module    | Support Platform | Support OS                          | CN_CSI1 | CN_CSI2 | Resolution, Frame Rate |
-| --------- | ---------------- | ----------------------------------- | ------- | ------- | ---------------------- |
-| EVDM-OOM1 | EXEC-Q911        | Yocto Linux 1.6 | ✅      | ✅      | 1920x1080, 30 FPS      |
-| EV2M-OOM3 | EXEC-Q911        | Yocto Linux 1.6 | ✅      | ✅      | 1920x1080, 30 FPS      |
-| EV8M-OOM1 | EXEC-Q911        | Yocto Linux 1.6 | ✅      | ✅      | 1920x1080, 30 FPS      |
+| Module    | Support Platform | CN_CSI1 | CN_CSI2 | Resolution, Frame Rate |
+| --------- | ---------------- | ------- | ------- | ---------------------- |
+| EVDM-OOM1 | EXEC-Q911        | ✅      | ✅      | 1920x1080, 30 FPS      |
+| EV2M-OOM3 | EXEC-Q911        | ✅      | ✅      | 1920x1080, 30 FPS      |
+| EV8M-OOM1 | EXEC-Q911        | ✅      | ✅      | 1920x1080, 30 FPS      |
 
 > ✅ Supported | ❌ Not supported | ☑️ Coming soon
 
@@ -39,40 +39,9 @@ To connect the camera to the EXEC-Q911, follow these steps:
 1. Use a 22-pin to 22-pin MIPI cable (A-B style) to connect `CN_CSIx` to the camera. This specific cable type is essential for correct CSI lane alignment.
 2. Power on the EXEC-Q911.
 
-<br />
-<br />
-
-### 2. Connecting to iQ-9075 EVK
-
-| Module    | Support Platform | Support OS                          | JCAM0 | JCAM1 | JCAM2 | JCAM3 | Resolution, Frame Rate |
-| --------- | ---------------- | ----------------------------------- | ----- | ----- | ----- | ----- | ---------------------- |
-| EVDM-OOM1 | iQ-9075 EVK      | Yocto Linux 1.6| ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
-| EV2M-OOM3 | iQ-9075 EVK      | Yocto Linux 1.6 | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
-| EV8M-OOM1 | iQ-9075 EVK      | Yocto Linux 1.6 | ✅    | ✅    | ✅    | ✅    | 1920x1080, 30 FPS      |
-
-> ✅ Supported | ❌ Not supported | ☑️ Coming soon
-
-<div align="center">
-  <img src="./pic/evk-mipi.png" width="80%">
-</div>
-
-To connect the camera to the iQ-9075 EVK, follow these steps:
-
-1. Use a 22-to-30 pin adapter to connect the 22-pin to 22-pin MIPI cable (A-A style). 
-2. Connect `JCAMx` to the camera. This cable type is required for proper CSI lane alignment.
-3. Power on the iQ-9075 EVK.
-
 ## How to Install
 
 For a complete walkthrough of the setup process for both Yocto Linux systems, see the **[Installation Guide](./install.md)**.
-
-## How to Switch Modules
-
-Please refer to **[Installation Guide](./install.md)**, reinstall the module package (tar.gz) you want to install, and then reboot the system to replace the module.
-
-## How to Verify
-
-For instructions on verifying that the camera is functioning correctly after installation, see the **[Verify Guide](./verify.md)**.
 
 ## How to Use
 
@@ -80,18 +49,30 @@ If the camera is properly connected and the required drivers are installed, you 
 
 > 🔔 **Note:** For **Yocto Linux**, suppress kernel messages before running pipelines: `echo 0 > /proc/sys/kernel/printk`
 
-To capture a single stream and encode it to MP4:
+> 🔔 **Note:** If `HMSMaxDelayedJobCount` has not yet been added to `/var/cache/camera/camxoverridesettings.txt`, you can refer to the following to add it:
+> ```bash
+> echo "HMSMaxDelayedJobCount=8" > /var/cache/camera/camxoverridesettings.txt
+> ```
+
+> 🔔 **Note:** All of the following example usages require a **DP (DisplayPort)** connection to view the live stream output.
+
+### Single & Dual Channel Stream
+
+The [`2ch_display.sh`](../../utils/common/2ch_display.sh) script displays live video streams on the Wayland display.
+
+Run it on the target:
 
 ```bash
-pkill cam-server && sleep 5
-gst-launch-1.0 -e qtiqmmfsrc exposure-mode=off manual-exposure-time=10000000000 name=camsrc camera=0 ! \
-'video/x-raw,width=1920,height=1080,framerate=30/1' ! \
-videoconvert ! v4l2h264enc ! h264parse ! mp4mux ! filesink location=test.mp4
+./utils/common/2ch_display.sh
 ```
 
-<div align="center">
-  <img src="./pic/mpipi.gif" width="80%">
-</div>
+> 🔔 **Note:** This script supports **1–2 streams** only (`camera=0` and `camera=1`).
+
+![Dual Channel Stream](./pic/two_ch.jpg)
+
+## How to Switch Modules
+
+Please refer to **[Installation Guide](./install.md)**, reinstall the module package (tar.gz) you want to install, and then reboot the system to replace the module.
 
 ## FAQ
 

@@ -1,4 +1,24 @@
 # Change Logs
+## v2.0.0
+### Supported Platform
+- Upgraded to `Yocto QLI 1.8`; dropped Ubuntu and MZB build targets.
+- Dropped iQ-9075 EVK; EXEC-Q911 is now the only documented evaluation kit.
+
+### New Features
+- Add `fw2xml` converter: AP1302 bootdata firmware → CHI-CDK `initSettings` XML.
+- Refresh AP1302 bootdata payload and probe sequence for EV8M-OOM1.
+
+### Changes
+- Merge `generate.sh` into `build.sh`; `release.sh` renamed to `build.sh`.
+- Refresh release tarballs for all camera modules; drop stale `yocto_1.6` artifacts.
+
+### Fixed
+- Remove stale AP1302 `0x7A` POLL from GMSL probe sequence for EVDF-OOM1.
+
+### Documentation
+- Add browsable HTML porting guide site under `doc/porting_guide/`.
+- Remove iQ-9075 EVK connection guides, support tables, and images from all documentation.
+
 ## v1.1.6
 ### Infrastructure
 - `sync-to-public.yml` clears `public-repo/release/*` before copying so removed tarballs drop from the public mirror.
