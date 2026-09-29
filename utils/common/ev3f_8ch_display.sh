@@ -3,7 +3,7 @@
 echo "HMSMaxDelayedJobCount=8" > /var/cache/camera/camxoverridesettings.txt
 
 pkill cam-server && sleep 15 &&
-GST_GL_API=gles2 XDG_RUNTIME_DIR=/dev/socket/weston WAYLAND_DISPLAY=wayland-1 \
+GST_GL_API=gles2 XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-1 \
 gst-camera-per-port-example --custom <<EOF
 1 0 2 3 5 4 6 7
 1

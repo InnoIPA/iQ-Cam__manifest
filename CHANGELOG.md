@@ -1,4 +1,11 @@
 # Change Logs
+## v3.0.0
+### New Features
+- Updated all module drivers to QLI 2.0
+- Added frame sync mode for evdf-oom1
+- Added frame sync mode for ev3f-zsm1
+- Added automated testing and test reports
+
 ## v2.0.0
 ### Supported Platform
 - Upgraded to `Yocto QLI 1.8`; dropped Ubuntu and MZB build targets.

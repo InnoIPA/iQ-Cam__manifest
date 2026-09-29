@@ -1,7 +1,7 @@
 To deploy the camera drivers and configuration, follow these steps.
 
 The release packages are produced as `release/<module_name>.tar.gz` (one per
-camera module). They are installed into `/usr/lib/camera` on the target.
+camera module). They are installed into `/usr/lib/camx/lemans/camera` on the target.
 
 ## Option A — scripted (recommended)
 
@@ -12,7 +12,7 @@ From the host, with the target connected over `adb`:
 ```
 
 `deploy.sh` pushes `release/<module_name>.tar.gz` to the target, remounts `/usr`
-read-write, and extracts the tarball into `/usr/lib/camera`. It does not reboot
+read-write, and extracts the tarball into `/usr/lib/camx/lemans/camera`. It does not reboot
 or run a capture test. (`<module_name>` defaults to `ev2m_oom3` if omitted.)
 
 To build and deploy in one step, use `./utils/build_deploy.sh <module_name>`.
@@ -29,6 +29,6 @@ To build and deploy in one step, use `./utils/build_deploy.sh <module_name>`.
 
     ```bash
     adb shell 'mount -o rw,remount /usr'
-    adb shell 'tar -xzvf /home/root/<module_name>.tar.gz -C /usr/lib/camera'
+    adb shell 'tar -xzvf /home/root/<module_name>.tar.gz -C /usr/lib/camx/lemans/camera'
     adb shell 'reboot'
     ```

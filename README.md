@@ -6,13 +6,14 @@ iQ-Cam is a project designed to generate CHI-CDK compatible patches for Qualcomm
 
 This repo supports the following Q911 BSP versions (from the [meta-iQ__manifest](https://github.com/InnoIPA/meta-iQ__manifest) repository):
 
-| BSP Version | QLI version | iQ-Cam Version         | Tested |
-| ----------- | ----------- | ---------------------- | ------ |
-| **v2.1.0**  | v1.6        | v1.1.4, v1.1.5, v1.1.6 | ✅     |
-| **v2.3.0**  | v1.8        | -                      | -      |
-| **v2.3.1**  | v1.8        | -                      | -      |
-| **v2.3.2**  | v1.8        | v2.0.0                 | ✅     |
-| **v2.3.3**  | v1.8        | -                      | -      |
+| BSP Version | QLI version | iQ-Cam Version         | Tested                                                      |
+| ----------- | ----------- | ---------------------- | ----------------------------------------------------------- |
+| **v2.1.0**  | v1.6        | v1.1.4, v1.1.5, v1.1.6 | ✅                                                          |
+| **v2.3.0**  | v1.8        | -                      | -                                                           |
+| **v2.3.1**  | v1.8        | -                      | -                                                           |
+| **v2.3.2**  | v1.8        | v2.0.0                 | ✅                                                          |
+| **v2.3.3**  | v1.8        | -                      | -                                                           |
+| **v2.5.0**  | v2.0        | v3.0.0                 | ✅ [report](doc/common/test_summary/test_summary_v3.0.0.md) |
 
 > **Note:** Although **v2.3.0**, **v2.3.1**, and **v2.3.3** have not been explicitly tested, they are all based on QLI 1.8, so they should work without issues.
 
@@ -42,6 +43,7 @@ Gigabit Multimedia Serial Link (GMSL) is a robust interface that allows high-spe
 ## Release Notes
 | Version | Key Changes |
 | :--- | :--- |
+| **v3.0.0** | Updated all module drivers to QLI 2.0; added frame sync mode for EVDF-OOM1 and EV3F-ZSM1; added automated testing and test reports. |
 | **v2.0.0** | Upgraded to Yocto QLI 1.8 (dropped Ubuntu and MZB targets); fixed EVDF-OOM1 GMSL probe sequence; added HTML porting guide site; removed iQ-9075 EVK from documentation — EXEC-Q911 is now the only documented evaluation kit. |
 | **v1.1.6** | Added `build_deploy_test.sh` end-to-end build/deploy/capture script and Claude Code workflow skills; imported vendor reference docs (Qualcomm 1.6/1.8 Camera Guide, GMSL2, MAX96724, MAX9295D); added EV3F-ZSM1 PP19 known-good baseline and `doc/common/verify.md`; public-mirror sync now clears `release/*` before copying. |
 | **v1.1.5** | Removed Ubuntu support from documentation; updated BSP support section; removed expired release packages. |
