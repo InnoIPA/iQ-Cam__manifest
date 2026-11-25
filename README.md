@@ -1,6 +1,23 @@
-![camera_family](doc/common/pic/camera_family.jpg)
 # iQ-Cam
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="doc/common/brand/iQ-badge-white-cam.svg">
+    <img src="doc/common/brand/iQ-badge-ink-cam.svg" alt="iQ-Cam" width="160">
+  </picture>
+</p>
+
+<h2 align="center"><em>Configure, Build, Deploy, Camera Ready.</em></h2>
+
+
+<h3 align="center">It helps developers bring up cameras on Qualcomm platforms faster by generating CHI-CDK compatible patches, with built-in tools for configuration, debugging and packaging.</h3>
+
+> [!NOTE]
+> iQ-Cam supports camera solutions for products based on the Innodisk Qualcomm Dragonwing SoC.
+
 iQ-Cam is a project designed to generate CHI-CDK compatible patches for Qualcomm-based camera systems. It provides a modular environment to configure, build, and deploy CHI-CDK patches easily, with utilities for debugging, XML modification, and packaging into .tar.gz.
+
+![camera_family](doc/common/pic/camera_family.jpg)
 
 ## BSP Support
 
