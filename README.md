@@ -7,15 +7,15 @@
   </picture>
 </p>
 
-<h2 align="center"><em>Configure, Build, Deploy, Camera Ready.</em></h2>
+<h2 align="center"><em>Download, Deploy, Camera Ready.</em></h2>
 
 
-<h3 align="center">It helps developers bring up cameras on Qualcomm platforms faster by generating CHI-CDK compatible patches, with built-in tools for configuration, debugging and packaging.</h3>
+<h3 align="center">Pre-built camera module packages for Innodisk Qualcomm Dragonwing platforms: download a package, deploy it to your device, and start streaming.</h3>
 
 > [!NOTE]
-> iQ-Cam supports camera solutions for products based on the Innodisk Qualcomm Dragonwing SoC.
+> iQ-Cam supports only Innodisk platforms based on Qualcomm Dragonwing SoCs (currently EXEC-Q911). Qualcomm reference kits, such as the IQ-9075 EVK, are not supported.
 
-iQ-Cam is a project designed to generate CHI-CDK compatible patches for Qualcomm-based camera systems. It provides a modular environment to configure, build, and deploy CHI-CDK patches easily, with utilities for debugging, XML modification, and packaging into .tar.gz.
+iQ-Cam provides ready-to-install camera driver packages that run Innodisk MIPI and GMSL camera modules on Innodisk Qualcomm Dragonwing platforms. Each module ships as a pre-built `.tar.gz` package in the `release/` directory. Copy the package to your device, extract it into the camera driver directory, and the camera is ready to use. You don't need to build anything.
 
 ![camera_family](doc/common/pic/camera_family.jpg)
 
@@ -75,15 +75,42 @@ Gigabit Multimedia Serial Link (GMSL) is a robust interface that allows high-spe
 The `release/` directory contains all generated .tar.gz files, which can be installed on compatible devices.
 Below is the list of available release packages:
 
-| Module Name                                                                                                                                                | Phy Type | Support Resolution |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------ |
-| [ev2m_oom3](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev2m-oom3-rhcf)                                                                         | DPHY     | `1920x1080,30FPS`  |
-| [ev8m_oom1](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev8m-oom1-rhcf)                                                                         | DPHY     | `1920x1080,30FPS`  |
-| [evdm_oom1](https://www.innodisk.com/en/products/camera/mipi-csi-2/evdm-oom1-rhcf)                                                                       | DPHY     | `1920x1080,30FPS`  |
-| [ev3f_zsm1](https://www.innodisk.com/en/products/camera/gmsl2/ev3f-zsm1-rxcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f) | DPHY     | `1920x1536,30FPS`  |
-| [evdf_oom1](https://www.innodisk.com/en/products/camera/gmsl2/evdf-oom1-rhcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f) | DPHY     | `1920x1080,30FPS`  |
+| Module Name                                                                                                                                                   | Phy Type | Support Resolution |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------ |
+| [ev2m_oom3](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev2m-oom3-rhcf)                                                                            | DPHY     | `1920x1080,30FPS`  |
+| [ev8m_oom1](https://www.innodisk.com/en/products/camera/mipi-csi-2/ev8m-oom1-rhcf)                                                                            | DPHY     | `1920x1080,30FPS`  |
+| [evdm_oom1](https://www.innodisk.com/en/products/camera/mipi-csi-2/evdm-oom1-rhcf)                                                                            | DPHY     | `1920x1080,30FPS`  |
+| [ev3f_zsm1](https://www.innodisk.com/en/products/camera/gmsl2/ev3f-zsm1-rxcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f)    | DPHY     | `1920x1536,30FPS`  |
+| [ev3f_zsm1](https://www.innodisk.com/en/products/camera/gmsl2/ev3f-zsm1-rxcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f)_fs | DPHY     | `1920x1536,30FPS`  |
+| [evdf_oom1](https://www.innodisk.com/en/products/camera/gmsl2/evdf-oom1-rhcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f)    | DPHY     | `1920x1080,30FPS`  |
+| [evdf_oom1](https://www.innodisk.com/en/products/camera/gmsl2/evdf-oom1-rhcf)_[pp19](https://www.innodisk.com/en/products/camera/adapter-board/eb022-2m4f)_fs | DPHY     | `1920x1080,30FPS`  |
 
-> **Note - Colorbar Mode:** Some release packages are available with a `_colorbar` suffix (e.g., `ev2m_oom3_colorbar`). In this mode, the only difference is that the output image uses a colorbar; all other behavior is the same as the standard mode.
+> **Note - Frame Sync:** The `_fs` packages enable frame sync mode for multi-camera capture. Single-camera still capture is a known limitation of these packages (see the [v3.0.0 test report](doc/common/test_summary/test_summary_v3.0.0.md)), so use the non-FS package of the same module when you only need one camera.
+
+### Download
+
+You can get the packages in two ways:
+
+- **Clone the whole repository** to get every package at once:
+
+    ```bash
+    git clone https://github.com/InnoIPA/iQ-Cam__manifest.git
+    cd iQ-Cam__manifest/release
+    ```
+
+- **Download a single package:** open the package in [`release/`](https://github.com/InnoIPA/iQ-Cam__manifest/tree/main/release) on GitHub and click **Download raw file**. You can also fetch it from the command line with the raw file URL:
+
+    ```bash
+    # wget
+    wget https://raw.githubusercontent.com/InnoIPA/iQ-Cam__manifest/main/release/ev2m_oom3.tar.gz
+
+    # curl
+    curl -LO https://raw.githubusercontent.com/InnoIPA/iQ-Cam__manifest/main/release/ev2m_oom3.tar.gz
+    ```
+
+    Replace `ev2m_oom3.tar.gz` with the package for your camera module.
+
+To deploy the package to your device, follow the [Installation Guide](doc/common/install.md).
 
 
 ## License
