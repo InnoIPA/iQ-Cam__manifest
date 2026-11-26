@@ -13,7 +13,7 @@
 <h3 align="center">Pre-built camera module packages for Innodisk Qualcomm Dragonwing platforms: download a package, deploy it to your device, and start streaming.</h3>
 
 > [!NOTE]
-> iQ-Cam supports only Innodisk platforms based on Qualcomm Dragonwing SoCs (currently EXEC-Q911). Qualcomm reference kits, such as the IQ-9075 EVK, are not supported.
+> iQ-Cam supports only Innodisk platforms based on Qualcomm Dragonwing SoCs (currently EXEC-Q911).
 
 iQ-Cam provides ready-to-install camera driver packages that run Innodisk MIPI and GMSL camera modules on Innodisk Qualcomm Dragonwing platforms. Each module ships as a pre-built `.tar.gz` package in the `release/` directory. Copy the package to your device, extract it into the camera driver directory, and the camera is ready to use. You don't need to build anything.
 
